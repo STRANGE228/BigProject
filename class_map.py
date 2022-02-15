@@ -22,14 +22,20 @@ class Map(pg.sprite.Sprite):
     """
     def __init__(self, *group):
         super(Map, self).__init__(*group)
+        self.remake = True
         self.image = None
         self.rect = None
         self.pos = [0, 0]
         self.pos_step = 0.001
         self.zoom = 14
         self.mode = "sat"
-        self.search()
-        self.get_map()
+        self.fstring = 'Белая Холуница'
+
+    def update(self, events):
+        if self.remake:
+            self.search()
+            self.get_map()
+            self.remake = False
 
     def change_pos(self, bstring):
         self.image = image_conv(bstring)
@@ -49,11 +55,11 @@ class Map(pg.sprite.Sprite):
         else:
             print(request.status_code)
 
-    def search(self, string='Белая Холуница'):
+    def search(self):
         api_map = "http://geocode-maps.yandex.ru/1.x/"
         params = {
             "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
-            "geocode": string,
+            "geocode": self.fstring,
             "format": "json"
         }
         request = requests.get(api_map, params=params)
