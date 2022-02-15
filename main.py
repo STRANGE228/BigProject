@@ -8,6 +8,7 @@ pg.init()
 level0_sprites = pg.sprite.Group()
 level1_sprites = pg.sprite.Group()
 level2_sprites = pg.sprite.Group()
+
 # Добавляем классы
 main_map = Map(level0_sprites)
 input1 = InputStr(10, 10, 100, 20, level1_sprites)
@@ -33,6 +34,7 @@ while work:
 
     if input1.text_out:
         main_map.fstring = input1.text_out
+        main_map.need_search = True
         main_map.remake = True
         input1.text_out = ''
 
