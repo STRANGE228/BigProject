@@ -2,13 +2,15 @@ import sys
 import pygame as pg
 from const import *
 from class_map import Map
+from class_input import InputStr
 
+pg.init()
 level0_sprites = pg.sprite.Group()
 level1_sprites = pg.sprite.Group()
 level2_sprites = pg.sprite.Group()
 # Добавляем классы
-Map(level0_sprites)
-pg.init()
+main_map = Map(level0_sprites)
+input1 = InputStr(10, 10, 100, 20, level1_sprites)
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
 FPS = 25
@@ -28,6 +30,11 @@ while work:
     level0_sprites.draw(screen)
     level1_sprites.draw(screen)
     level2_sprites.draw(screen)
+
+    if input1.text_out:
+        main_map.fstring = input1.text_out
+        main_map.remake = True
+        input1.text_out = ''
 
     pg.display.flip()
     clock.tick(FPS)

@@ -32,6 +32,14 @@ class Map(pg.sprite.Sprite):
         self.fstring = 'Белая Холуница'
 
     def update(self, events):
+        for event in events:
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_PAGEUP:
+                    self.zoom = max(self.zoom - 1, 1)
+                    self.remake = True
+                elif event.key == pg.K_PAGEDOWN:
+                    self.zoom = min(self.zoom + 1, 19)
+                    self.remake = True
         if self.remake:
             self.search()
             self.get_map()
