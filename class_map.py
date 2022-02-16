@@ -1,3 +1,5 @@
+import pprint
+
 import pygame as pg
 from io import BytesIO
 import requests
@@ -23,11 +25,12 @@ class Map(pg.sprite.Sprite):
         self.image = None
         self.rect = None
         self.pos = [0, 0]
-        self.pos_step = 0.016 * 2.5
+        self.pos_step = 0.016 * 2
         self.spn = 0.016
         # self.zoom = 14
         self.mode = "sat"
         self.pts = []
+        self.addres = None
         self.fstring = 'Белая Холуница'
 
     def update(self, events):
@@ -37,12 +40,12 @@ class Map(pg.sprite.Sprite):
                     self.spn = max(self.spn * 2, 0.0005)
                     # self.zoom = max(self.zoom - 1, 1)
                     self.remake = True
-                    self.pos_step = self.spn * 2.5
+                    self.pos_step = self.spn * 2
                 elif event.key == pg.K_PAGEDOWN:
                     self.spn = min(self.spn / 2, 65.536)
                     # self.zoom = min(self.zoom + 1, 19)
                     self.remake = True
-                    self.pos_step = self.spn * 2.5
+                    self.pos_step = self.spn * 2
                 elif event.key == pg.K_UP:
                     self.pos[1] = min(self.pos[1] + self.pos_step, 85)
                     self.remake = True
@@ -92,9 +95,14 @@ class Map(pg.sprite.Sprite):
         request = requests.get(api_map, params=params)
         if request.status_code == 200:
             result = request.json()
-            self.pos = list(map(float, result["response"]["GeoObjectCollection"][
-                "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
-            if not self.pts:
-                self.pts.append(self.pos)
+            try:
+                self.pos = list(map(float, result["response"]["GeoObjectCollection"][
+                    "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
+                self.addres = result["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"][
+                    'metaDataProperty']['GeocoderMetaData']['Address']['formatted']
+                if not self.pts:
+                    self.pts.append(self.pos.copy())
+            except IndexError:
+                pass
         else:
             print(request.status_code)

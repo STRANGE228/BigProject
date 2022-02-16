@@ -27,18 +27,18 @@ class ButtonMap(pg.sprite.Sprite):
                     self.change_text()
                     self.remake = True
 
-        self.image = self.font.render(self.text, True, 'white', 'black')
+        self.image = self.font.render(self.text, True, 'white', 'red')
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
 
 
 class ButtonSearch(pg.sprite.Sprite):
-    def __init__(self, x, y, w, h, *groups):
+    def __init__(self, x, y, *groups):
         super(ButtonSearch, self).__init__(*groups)
         self.font = pg.font.Font(None, 50)
-        self.image = self.font.render("Искать", True, 'white', 'black')
-        self.rect = pg.Rect(x, y, w, h)
+        self.image = self.font.render("Искать", True, 'white', 'purple')
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.remake = False
@@ -51,11 +51,11 @@ class ButtonSearch(pg.sprite.Sprite):
 
 
 class ButtonClear(pg.sprite.Sprite):
-    def __init__(self, x, y, w, h, *groups):
+    def __init__(self, x, y, *groups):
         super(ButtonClear, self).__init__(*groups)
         self.font = pg.font.Font(None, 50)
-        self.image = self.font.render("Сброс поискового результата", True, 'white', 'black')
-        self.rect = pg.Rect(x, y, w, h)
+        self.image = self.font.render("Сброс поискового результата", True, 'white', 'grey')
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.clear = False
