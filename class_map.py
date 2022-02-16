@@ -92,9 +92,12 @@ class Map(pg.sprite.Sprite):
         request = requests.get(api_map, params=params)
         if request.status_code == 200:
             result = request.json()
-            self.pos = list(map(float, result["response"]["GeoObjectCollection"][
-                "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
-            if not self.pts:
-                self.pts.append(self.pos.copy())
+            try:
+                self.pos = list(map(float, result["response"]["GeoObjectCollection"][
+                    "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
+                if not self.pts:
+                    self.pts.append(self.pos.copy())
+            except IndexError:
+                pass
         else:
             print(request.status_code)

@@ -7,6 +7,7 @@ class InputStr(pg.sprite.Sprite):
         self.rect = pg.Rect(x, y, w, h)
         self.x = x
         self.y = y
+        self.w = w
         self.image = None
         self.text = ""
         self.font = pg.font.Font(None, 50)
@@ -23,7 +24,8 @@ class InputStr(pg.sprite.Sprite):
                 else:
                     self.text += event.unicode
 
-        self.image = self.font.render(f"Найти: {self.text}", True, 'white')
+        self.image = self.font.render(f"Найти: {self.text} {' ' * (58 - len(self.text))}", True, 'white', (230, 0, 230))
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+
