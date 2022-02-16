@@ -95,6 +95,6 @@ class Map(pg.sprite.Sprite):
             self.pos = list(map(float, result["response"]["GeoObjectCollection"][
                 "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
             if not self.pts:
-                self.pts.append(self.pos)
+                self.pts.append(self.pos.copy())
         else:
             print(request.status_code)

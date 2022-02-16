@@ -37,7 +37,7 @@ class ButtonSearch(pg.sprite.Sprite):
     def __init__(self, x, y, w, h, *groups):
         super(ButtonSearch, self).__init__(*groups)
         self.font = pg.font.Font(None, 50)
-        self.image = self.font.render("Найти", True, 'white', 'black')
+        self.image = self.font.render("Искать", True, 'white', 'black')
         self.rect = pg.Rect(x, y, w, h)
         self.rect.x = x
         self.rect.y = y
@@ -54,7 +54,7 @@ class ButtonClear(pg.sprite.Sprite):
     def __init__(self, x, y, w, h, *groups):
         super(ButtonClear, self).__init__(*groups)
         self.font = pg.font.Font(None, 50)
-        self.image = self.font.render("Отчистить", True, 'white', 'black')
+        self.image = self.font.render("Сброс поискового результата", True, 'white', 'black')
         self.rect = pg.Rect(x, y, w, h)
         self.rect.x = x
         self.rect.y = y

@@ -14,13 +14,14 @@ names = {' схема   ': 'map',
          'гибрид ': 'sat,skl'}
 
 main_map = Map(level0_sprites)
-input1 = InputStr(10, 10, 100, 20, level1_sprites)
-type_map = ButtonMap(10, (HEIGHT - 50), 100, 50, level1_sprites)
-search_map = ButtonSearch((WIDTH - 110), (HEIGHT - 50), 100, 50, level1_sprites)
-clear_map = ButtonClear((WIDTH - 300), (HEIGHT - 50), 100, 50, level1_sprites)
+input1 = InputStr(10, (HEIGHT - 150), 100, 20, level1_sprites)
+type_map = ButtonMap(10, (HEIGHT - 250), 100, 50, level1_sprites)
+search_map = ButtonSearch((WIDTH - 120), (HEIGHT - 110), 100, 50, level1_sprites)
+clear_map = ButtonClear(120, (HEIGHT - 50), 100, 50, level1_sprites)
 
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
+# pg.key.set_repeat(800, 100)
 FPS = 25
 
 work = True
@@ -45,11 +46,13 @@ while work:
         main_map.remake = True
 
     if search_map.remake:
+        main_map.pts = []
         search_map.remake = False
         input1.text_out = input1.text
         input1.text = ""
 
     if input1.text_out:
+        main_map.pts = []
         main_map.fstring = input1.text_out
         main_map.need_search = True
         main_map.remake = True
