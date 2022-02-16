@@ -17,7 +17,8 @@ names = {' схема   ': 'map',
 # Добавляем классы
 main_map = Map(level0_sprites)
 input1 = InputStr(10, 10, 100, 20, level1_sprites)
-type_map = ButtonMap(10, (HEIGHT - 50), 10, 50, level1_sprites)
+type_map = ButtonMap(10, (HEIGHT - 50), 100, 50, level1_sprites)
+search_map = ButtonSearch((WIDTH - 110), (HEIGHT - 50), 100, 50, level1_sprites)
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
 FPS = 25
@@ -37,6 +38,11 @@ while work:
     level0_sprites.draw(screen)
     level1_sprites.draw(screen)
     level2_sprites.draw(screen)
+
+    if search_map.remake:
+        search_map.remake = False
+        input1.text_out = input1.text
+        input1.text = ""
 
     if input1.text_out:
         main_map.fstring = input1.text_out

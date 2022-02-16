@@ -73,7 +73,8 @@ class Map(pg.sprite.Sprite):
             "spn": f'{self.spn},{self.spn}',
             # "z": self.zoom,
             "l": self.mode,
-            "size": "650,450"
+            "size": "650,450",
+            "pt": f'{self.pos[0]},{self.pos[1]},pm2ywl'
         }
         request = requests.get(api_map, params=params)
         if request.status_code == 200:
