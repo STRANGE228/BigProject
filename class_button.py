@@ -65,3 +65,26 @@ class ButtonClear(pg.sprite.Sprite):
             if event.type == pg.MOUSEBUTTONDOWN:
                 if self.rect.collidepoint(event.pos):
                     self.clear = True
+
+
+class ButtonIndex(pg.sprite.Sprite):
+    def __init__(self, x, y, w, h, *groups):
+        super(ButtonIndex, self).__init__(*groups)
+        self.font = pg.font.Font(None, 49)
+        self.image = self.font.render("Почтовый индекс", True, 'white', 'gray')
+        self.rect = pg.Rect(x, y, w, h)
+        self.rect.x = x
+        self.rect.y = y
+        self.clear = False
+        self.index = True
+
+    def update(self, events):
+        for event in events:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if self.rect.collidepoint(event.pos):
+                    if self.index:
+                        self.index = False
+                        self.image = self.font.render("Почтовый индекс", True, 'white', 'black')
+                    else:
+                        self.index = True
+                        self.image = self.font.render("Почтовый индекс", True, 'white', 'gray')

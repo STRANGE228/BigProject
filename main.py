@@ -3,7 +3,7 @@ from const import *
 from class_map import Map
 from class_input import InputStr
 from class_button import *
-from class_output import OutputStr
+from class_output import *
 
 pg.init()
 level0_sprites = pg.sprite.Group()
@@ -20,6 +20,8 @@ type_map = ButtonMap(10, (HEIGHT - 50), 100, 50, level1_sprites)
 search_map = ButtonSearch((WIDTH - 110), (HEIGHT - 50), 100, 50, level1_sprites)
 clear_map = ButtonClear((WIDTH - 300), (HEIGHT - 50), 100, 50, level1_sprites)
 output1 = OutputStr(10, 25, 100, 20, level1_sprites)
+index = ButtonIndex((WIDTH - 300), (HEIGHT - 100), 100, 50, level1_sprites)
+output2 = OutputStr(10, 45, 100, 20, level1_sprites)
 
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
@@ -46,7 +48,9 @@ while work:
         clear_map.clear = False
         main_map.remake = True
         main_map.address = ""
+        main_map.index = ""
         output1.print_out(main_map.address)
+        output2.print_out(main_map.index)
 
     if search_map.remake:
         search_map.remake = False
@@ -62,6 +66,10 @@ while work:
     if output1.out:
         output1.print_out(main_map.address)
         output1.text = ""
+        if index.index:
+            output2.print_out(main_map.index)
+        else:
+            output2.print_out("")
 
     if type_map.remake:
         main_map.mode = names[type_map.text]

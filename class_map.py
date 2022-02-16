@@ -29,8 +29,9 @@ class Map(pg.sprite.Sprite):
         # self.zoom = 14
         self.mode = "sat"
         self.pts = []
-        self.fstring = 'Белая Холуница'
+        self.fstring = 'г.Киров ул.Ленина 5'
         self.address = ""
+        self.index = ""
 
     def update(self, events):
         for event in events:
@@ -98,6 +99,11 @@ class Map(pg.sprite.Sprite):
                 "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
             self.address = result['response']['GeoObjectCollection'][
                 'featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['formatted']
+            try:
+                self.index = result['response']['GeoObjectCollection'][
+                'featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['postal_code']
+            except Exception:
+                self.index = ""
             if not self.pts:
                 self.pts.append(self.pos)
         else:
