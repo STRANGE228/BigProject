@@ -29,7 +29,7 @@ class Map(pg.sprite.Sprite):
         # self.zoom = 14
         self.mode = "sat"
         self.pts = []
-        self.fstring = 'г.Киров ул.Ленина 5'
+        self.fstring = 'г.Белая Холуница ул.Ленина 5'
         self.address = ""
         self.index = ""
 
