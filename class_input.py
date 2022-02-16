@@ -23,5 +23,3 @@ class InputStr(pg.sprite.Sprite):
 
         self.image = self.font.render(self.text, True, 'white')
         self.rect = self.image.get_rect()
-
-
