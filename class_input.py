@@ -5,9 +5,11 @@ class InputStr(pg.sprite.Sprite):
     def __init__(self, x, y, w, h, *groups):
         super(InputStr, self).__init__(*groups)
         self.rect = pg.Rect(x, y, w, h)
+        self.x = x
+        self.y = y
         self.image = None
         self.text = ""
-        self.font = pg.font.Font(None, 32)
+        self.font = pg.font.Font(None, 50)
         self.text_out = self.text
 
     def update(self, events):
@@ -21,5 +23,7 @@ class InputStr(pg.sprite.Sprite):
                 else:
                     self.text += event.unicode
 
-        self.image = self.font.render(self.text, True, 'white')
+        self.image = self.font.render(f"Найти: {self.text}", True, 'white')
         self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y

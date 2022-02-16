@@ -37,7 +37,7 @@ class ButtonSearch(pg.sprite.Sprite):
     def __init__(self, x, y, w, h, *groups):
         super(ButtonSearch, self).__init__(*groups)
         self.font = pg.font.Font(None, 50)
-        self.image = self.font.render("Найти", True, 'white', 'black')
+        self.image = self.font.render("Искать", True, 'white', 'black')
         self.rect = pg.Rect(x, y, w, h)
         self.rect.x = x
         self.rect.y = y
@@ -49,3 +49,19 @@ class ButtonSearch(pg.sprite.Sprite):
                 if self.rect.collidepoint(event.pos):
                     self.remake = True
 
+
+class ButtonClear(pg.sprite.Sprite):
+    def __init__(self, x, y, w, h, *groups):
+        super(ButtonClear, self).__init__(*groups)
+        self.font = pg.font.Font(None, 50)
+        self.image = self.font.render("Сброс поискового результата", True, 'white', 'black')
+        self.rect = pg.Rect(x, y, w, h)
+        self.rect.x = x
+        self.rect.y = y
+        self.clear = False
+
+    def update(self, events):
+        for event in events:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if self.rect.collidepoint(event.pos):
+                    self.clear = True
