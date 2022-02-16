@@ -16,6 +16,7 @@ def image_conv(bstring):
 class Map(pg.sprite.Sprite):
     """
     """
+
     def __init__(self, *group):
         super(Map, self).__init__(*group)
         self.remake = True
@@ -29,6 +30,7 @@ class Map(pg.sprite.Sprite):
         self.mode = "sat"
         self.pts = []
         self.fstring = 'Белая Холуница'
+        self.address = ""
 
     def update(self, events):
         for event in events:
@@ -94,7 +96,12 @@ class Map(pg.sprite.Sprite):
             result = request.json()
             self.pos = list(map(float, result["response"]["GeoObjectCollection"][
                 "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
+            self.address = result['response']['GeoObjectCollection'][
+                'featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['formatted']
             if not self.pts:
                 self.pts.append(self.pos)
         else:
             print(request.status_code)
+
+    def get_address(self):
+        return self.address
