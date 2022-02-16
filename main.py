@@ -1,5 +1,4 @@
 import sys
-import pygame as pg
 from const import *
 from class_map import Map
 from class_input import InputStr
@@ -14,11 +13,12 @@ names = {' схема   ': 'map',
          'спутник': 'sat',
          'гибрид ': 'sat,skl'}
 
-# Добавляем классы
 main_map = Map(level0_sprites)
 input1 = InputStr(10, 10, 100, 20, level1_sprites)
 type_map = ButtonMap(10, (HEIGHT - 50), 100, 50, level1_sprites)
 search_map = ButtonSearch((WIDTH - 110), (HEIGHT - 50), 100, 50, level1_sprites)
+clear_map = ButtonClear((WIDTH - 300), (HEIGHT - 50), 100, 50, level1_sprites)
+
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
 FPS = 25
@@ -38,6 +38,11 @@ while work:
     level0_sprites.draw(screen)
     level1_sprites.draw(screen)
     level2_sprites.draw(screen)
+
+    if clear_map.clear:
+        main_map.pts = []
+        clear_map.clear = False
+        main_map.remake = True
 
     if search_map.remake:
         search_map.remake = False

@@ -2,7 +2,6 @@ import pygame as pg
 from io import BytesIO
 import requests
 from PIL import Image
-from const import *
 
 
 def image_conv(bstring):
@@ -28,6 +27,7 @@ class Map(pg.sprite.Sprite):
         self.spn = 0.016
         # self.zoom = 14
         self.mode = "sat"
+        self.pts = []
         self.fstring = 'Белая Холуница'
 
     def update(self, events):
@@ -74,7 +74,7 @@ class Map(pg.sprite.Sprite):
             # "z": self.zoom,
             "l": self.mode,
             "size": "650,450",
-            "pt": f'{self.pos[0]},{self.pos[1]},pm2ywl'
+            "pt": "~".join([f'{elem[0]},{elem[1]},pm2ywl' for elem in self.pts])
         }
         request = requests.get(api_map, params=params)
         if request.status_code == 200:
@@ -94,5 +94,7 @@ class Map(pg.sprite.Sprite):
             result = request.json()
             self.pos = list(map(float, result["response"]["GeoObjectCollection"][
                 "featureMember"][0]["GeoObject"]["Point"]["pos"].split()))
+            if not self.pts:
+                self.pts.append(self.pos)
         else:
             print(request.status_code)
