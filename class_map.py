@@ -24,7 +24,7 @@ class Map(pg.sprite.Sprite):
         self.image = None
         self.rect = None
         self.pos = [0, 0]
-        self.pos_step = 0.016 * 2.5
+        self.pos_step = 0.016
         self.spn = 0.016
         # self.zoom = 14
         self.mode = "sat"
@@ -40,12 +40,12 @@ class Map(pg.sprite.Sprite):
                     self.spn = max(self.spn * 2, 0.0005)
                     # self.zoom = max(self.zoom - 1, 1)
                     self.remake = True
-                    self.pos_step = self.spn * 2.5
+                    self.pos_step = self.spn
                 elif event.key == pg.K_PAGEDOWN:
                     self.spn = min(self.spn / 2, 65.536)
                     # self.zoom = min(self.zoom + 1, 19)
                     self.remake = True
-                    self.pos_step = self.spn * 2.5
+                    self.pos_step = self.spn
                 elif event.key == pg.K_UP:
                     self.pos[1] = min(self.pos[1] + self.pos_step, 85)
                     self.remake = True
