@@ -99,7 +99,7 @@ class Map(pg.sprite.Sprite):
             self.address = result['response']['GeoObjectCollection'][
                 'featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['formatted']
             if not self.pts:
-                self.pts.append(self.pos)
+                self.pts.append(self.pos.copy)
         else:
             print(request.status_code)
 
