@@ -105,7 +105,7 @@ class Map(pg.sprite.Sprite):
             except Exception:
                 self.index = ""
             if not self.pts:
-                self.pts.append(self.pos)
+                self.pts.append(self.pos.copy)
         else:
             print(request.status_code)
 
